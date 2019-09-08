@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+
+    <meta name="title" content="<%- SEO_Baslik %>">
+    <meta name="description" content="<%- SEO_Aciklama %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%- SEO_Baslik %>">
+    <meta property="og:description" content="<%- SEO_Aciklama %>">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="<%- SEO_Baslik %>">
+    <meta property="twitter:description" content="<%- SEO_Aciklama %>">
+    <meta name="keywords" content="<%- SEO_Anahtar_Kelimeler %>">
+    <meta name="author" content="<%- SEO_Yaratici %>">
+
+
+    <title>
+        <%- SEO_Baslik %>
+    </title>
+    <base href="/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link href="https://storage.googleapis.com/yukluyoo-cdn/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="https://storage.googleapis.com/yukluyoo-cdn/css/mdb.min.css" type="text/css" rel="stylesheet">
+    <!--<link href="https://storage.googleapis.com/yukluyoo-cdn/js/jquery-3.4.1.min.js" type="text/css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        .load-bar {
+            position: relative;
+            margin-top: 20px;
+            width: 100%;
+            height: 6px;
+            background-color: #fdba2c;
+        }
+        
+        .bar {
+            content: "";
+            display: inline;
+            position: absolute;
+            width: 0;
+            height: 100%;
+            left: 50%;
+            text-align: center;
+        }
+        
+        .bar:nth-child(1) {
+            background-color: #da4733;
+            animation: loading 3s linear infinite;
+        }
+        
+        .bar:nth-child(2) {
+            background-color: #3b78e7;
+            animation: loading 3s linear 1s infinite;
+        }
+        
+        .bar:nth-child(3) {
+            background-color: #fdba2c;
+            animation: loading 3s linear 2s infinite;
+        }
+        
+        @keyframes loading {
+            from {
+                left: 50%;
+                width: 0;
+                z-index: 100;
+            }
+            33.3333% {
+                left: 0;
+                width: 100%;
+                z-index: 10;
+            }
+            to {
+                left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">
+        <h1>
+            <img src="https://storage.googleapis.com/yukluyoo-cdn/img/YUKLUYO.png" alt="logo">
+        </h1>
+    </div>
+
+    <div class="text-center align-middle shadow p-3 mb-5 bg-white container">
+        <form method="POST" action="/api/upload" id="yuklemeform" enctype="multipart/form-data" style="">
+
+            <div class="field">
+                <div class="file is-centered is-boxed is-success has-name">
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="resume" id="dosya" onchange="tespit()">
+                        <span class="file-cta" style="border-radius: 3px;">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label" id="dosyabelirtec">
+                                Dosya Seç!
+                            </span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class="text-center">Sitemize dosya yükleyerek <a href="/gizlilik">Gizlilik Politikası</a>'nı kabul etmiş sayılırsınız.</div>
+            <button type="submit" class="btn btn-danger" style="border-radius: 3px;" onclick="loadingoster()" disabled="disabled" id="yuklemebutonu">Önce
+                Dosyaları Alalım</button>
+
+        </form>
+        <div id="loadingekran" style="display: none;">
+            <div class=" load-bar ">
+                <div class=" bar "></div>
+                <div class=" bar "></div>
+                <div class=" bar "></div>
+            </div>
+            <p>Sadece biraz bekleyin, hemen geleceğiz...</p>
+        </div>
+    </div>
+    <div class=" container ">
+        <div class=" row ">
+            <div class=" text-center shadow p-3 mb-5 bg-white col-sm ">
+                <h3><a href=" http://yukluy.ooo ">Yüklüy.ooo</a> nasıl kullanılır?</h3>
+
+                Açıklama girmeniz gerekmekte eğer istemiyorsanız burayı kaldırın
+
+            </div>
+            <div class=" text-center shadow p-3 mb-5 bg-white col-sm ">
+                <h3><a href=" http://yukluy.ooo ">Yüklüy.ooo</a> nedir? Ne işe yarar?</h3>
+
+                Açıklama girmeniz gerekmekte eğer istemiyorsanız burayı kaldırın
+
+            </div>
+        </div>
+        <script>
+            var inputDosya = document.getElementById("dosya");
+            var inputDosyaBelirtec = document.getElementById("dosyabelirtec");
+            var buttonYuklemeButonu = document.getElementById("yuklemebutonu");
+            var loadingLoadingEkran = document.getElementById("loadingekran");
+            var formYuklemeForm = document.getElementById("yuklemeform");
+            if (inputDosya.files.length == 0) {
+                inputDosyaBelirtec.innerHTML = " Hiç Dosya Seçilmemiş ";
+            }
+
+            function buttonYuklemeButonuOnayla() {
+                buttonYuklemeButonu.innerHTML = " Yüklemeyi başlat! "
+                buttonYuklemeButonu.className = " btn btn-success mask waves-effect waves-light rgba-white-slight "
+                buttonYuklemeButonu.disabled = ""
+            }
+
+            function loadingoster() {
+                loadingLoadingEkran.style = ""
+                formYuklemeForm.style = "display: none;"
+            }
+
+            function buttonYuklemeButonuReddet() {
+                buttonYuklemeButonu.innerHTML = " Önce Dosyaları Alalım "
+                buttonYuklemeButonu.className = " btn btn-danger "
+                buttonYuklemeButonu.disabled = " disabled "
+                inputDosyaBelirtec.innerHTML = " Hiç Dosya Seçilmemiş ";
+            }
+
+            /*function ToplamBoyut() {
+                for (let index = 0; index < inputDosya.files.length; index++) {
+                    let toplamboyut = toplamboyut + inputDosya.files[index].size;
+                }
+                return toplamboyut
+            }*/
+
+            function tespit() {
+                if (inputDosya.files.length == 0) {
+                    buttonYuklemeButonuReddet()
+                } else if (inputDosya.files.length == 1) {
+                    inputDosyaBelirtec.innerHTML = inputDosya.files[0].name + " ( " + (inputDosya.files[0].size / 1024).toString().substr(0, 5) + " KB) "
+                    buttonYuklemeButonuOnayla()
+                } else {
+                    inputDosyaBelirtec.innerHTML = "Şu anlık sadece tek dosya girişine izin var!"
+                    buttonYuklemeButonuReddet()
+                }
+            }
+        </script>
+</body>
+
+</html>

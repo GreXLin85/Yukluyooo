@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>
+        <%- SEO_Baslik %>
+    </title>
+    <base href="/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link href="https://storage.googleapis.com/yukluyoo-cdn/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="https://storage.googleapis.com/yukluyoo-cdn/css/mdb.min.css" type="text/css" rel="stylesheet">
+    <!--<link href="https://storage.googleapis.com/yukluyoo-cdn/js/jquery-3.4.1.min.js" type="text/css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+</head>
+
+<body>
+
+    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center">
+        <h1>
+            <img src="https://storage.googleapis.com/yukluyoo-cdn/img/YUKLUYO.png" alt="logo">
+        </h1>
+    </div>
+
+    <div class="text-center align-middle shadow p-3 mb-5 bg-white container">
+
+        <div class="field">
+            <div class="file is-centered is-boxed is-success has-name">
+                <label class="file-label">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-download"></i>
+                            </span>
+                            <span class="file-label" id="dosyabelirtec">
+                                <%- DOSYA_ad %>
+                            </span>
+                        </span>
+                    </label>
+            </div>
+        </div>
+        <a href="/api/download/<%- DOSYA_uniqid %>"><button type="submit" class="btn btn-success" id="yuklemebutonu">İNDİR!</button></a>
+
+    </div>
+    <script>
+    </script>
+</body>
+
+</html>
