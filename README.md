@@ -1,4 +1,5 @@
 # Yüklüyooo
+# ABANDONED PROJECT
 Açık kaynak kodlu upload sitesi scripti
 
 # CDN
